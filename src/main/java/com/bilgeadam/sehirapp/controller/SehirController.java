@@ -3,6 +3,7 @@ package com.bilgeadam.sehirapp.controller;
 import com.bilgeadam.sehirapp.entity.Sehir;
 import com.bilgeadam.sehirapp.exception.SehirNotFound;
 import com.bilgeadam.sehirapp.repository.SehirRepository;
+import com.netflix.discovery.EurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,7 @@ public class SehirController {
     @Autowired
     private SehirRepository sehirRepository;
 
-    @GetMapping("/sehir/{id}")
+   @GetMapping("/sehir/{id}")
     public Sehir getSehir(@PathVariable("id") long sehirNo) {
 
         Sehir sehir = null;
@@ -38,9 +39,11 @@ public class SehirController {
         return sehirRepository.findAll();
     }
 
-    @GetMapping("/sehir-ad/{id}")
-    public String getSehirAd(@PathVariable("id") long no) {
-
-        return getSehir(no).getAd();
+    @GetMapping("/sehirad/{ad}")
+    public Sehir findSehirByAd(@PathVariable("ad") String ad)
+    {
+        Sehir sehir = sehirRepository.findByAd(ad);
+        return sehir;
     }
+
 }

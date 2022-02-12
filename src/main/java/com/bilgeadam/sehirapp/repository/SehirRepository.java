@@ -4,4 +4,5 @@ import com.bilgeadam.sehirapp.entity.Sehir;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SehirRepository extends JpaRepository<Sehir, Long> {
+    Sehir findByAd(String ad);
 }
